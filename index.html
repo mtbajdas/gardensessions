@@ -19,8 +19,7 @@
     --amber-soft:#FDE68A;
     --ink:#0F172A;
     --paper:#FFFFFF;
-    --paper-blue:#F0F9FF;
-    --paper-warm:#FFFBEB;
+    --paper-light:#EFF8FF;
     --muted:rgba(15,23,42,.55);
     --line:rgba(14,165,233,.18);
     --maxw:1120px;
@@ -131,17 +130,27 @@
   }
   .photo-grid .ph{
     overflow:hidden;
-    background:var(--paper-blue);
     position:relative;
+    display:flex;align-items:flex-end;
   }
   .photo-grid .ph img{
+    position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;
     transition:transform .55s ease;display:block;
   }
   .photo-grid .ph:hover img{transform:scale(1.05)}
+  .photo-grid .ph .ph-label{
+    position:relative;z-index:2;
+    font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.9);
+    background:rgba(11,29,74,.55);
+    backdrop-filter:blur(6px);
+    padding:.45em .9em;margin:10px;border-radius:999px;
+    pointer-events:none;
+  }
 
   /* ---------- cause ---------- */
-  .cause{background:var(--paper-blue)}
+  .cause{background:var(--paper-light)}
   section{padding:96px 0}
   .cause-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
   .cause h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:1.1rem;color:var(--ink)}
@@ -180,7 +189,7 @@
   .set-row.tbd .set-name{color:rgba(186,230,253,.3);font-size:1.15rem}
 
   /* ---------- details ---------- */
-  .details{background:var(--paper-warm)}
+  .details{background:var(--paper-light)}
   .det-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
   .details h2{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--ink);margin-bottom:1.4rem}
   .facts{list-style:none;display:grid;gap:18px}
@@ -193,7 +202,7 @@
   .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:grayscale(.1)}
 
   /* ---------- sponsors ---------- */
-  .sponsors{background:var(--paper-blue);text-align:center}
+  .sponsors{background:var(--paper-light);text-align:center}
   .sponsors h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:.6rem;color:var(--ink)}
   .sponsors .sub{color:var(--muted);max-width:48ch;margin:0 auto 40px}
   .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:40px}
@@ -258,17 +267,21 @@
 </header>
 
 <!-- ===================== VENUE PHOTOS ===================== -->
+<!-- Replace src="" values with real photos of Newton Park / downtown Winter Garden -->
 <section class="venue">
   <div class="wrap">
     <div class="photo-grid">
-      <div class="ph">
-        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80" alt="Outdoor festival at Newton Park, Winter Garden" loading="lazy">
+      <div class="ph" style="background:linear-gradient(135deg,#0B4D6B,#1A7EA8)">
+        <img src="" alt="Newton Park on Lake Apopka, Winter Garden" loading="lazy" onerror="this.style.display='none'">
+        <span class="ph-label">Newton Park</span>
       </div>
-      <div class="ph">
-        <img src="https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?auto=format&fit=crop&w=600&q=80" alt="Families enjoying a summer evening in the park" loading="lazy">
+      <div class="ph" style="background:linear-gradient(135deg,#1A5C3A,#2E9460)">
+        <img src="" alt="Downtown Winter Garden, Plant Street" loading="lazy" onerror="this.style.display='none'">
+        <span class="ph-label">Downtown Winter Garden</span>
       </div>
-      <div class="ph">
-        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Live music under the open sky" loading="lazy">
+      <div class="ph" style="background:linear-gradient(135deg,#5C3A0A,#A06820)">
+        <img src="" alt="West Orange Trail, Winter Garden" loading="lazy" onerror="this.style.display='none'">
+        <span class="ph-label">West Orange Trail</span>
       </div>
     </div>
   </div>
@@ -304,7 +317,7 @@
         <div><span class="set-name">Park opens</span></div>
       </div>
       <div class="set-row">
-        <span class="set-time">5:00 PM</span>
+        <span class="set-time">4:30 PM</span>
         <div>
           <span class="set-name">OYCE</span>
           <p class="set-desc">Opening set · Orlando Youth Chambers Ensembles, a Central Florida youth music charity</p>
