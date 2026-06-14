@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garden Sessions · A Live Music Festival for a Cure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0F1330;
+    --indigo:#1B2256;
+    --blue:#2A6FF0;
+    --blue-soft:#6CA0FF;
+    --amber:#F6A340;
+    --amber-soft:#FFCE83;
+    --magenta:#7E3B6B;
+    --ink:#14162B;
+    --paper:#EAF0FF;
+    --muted:rgba(234,240,255,.62);
+    --line:rgba(108,160,255,.22);
+    --maxw:1120px;
+    --display:"Bricolage Grotesque",system-ui,sans-serif;
+    --body:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--night);
+    color:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* ---------- shared layout ---------- */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{
+    font-size:.78rem;font-weight:600;text-transform:uppercase;
+    letter-spacing:.24em;color:var(--blue-soft);
+    display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem;
+  }
+  .eyebrow::before{
+    content:"";width:10px;height:10px;border-radius:50%;
+    border:2px solid var(--blue);box-shadow:0 0 12px var(--blue);
+  }
+  h1,h2,h3{font-family:var(--display);line-height:1.02;font-weight:700;letter-spacing:-.01em}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:var(--body);font-weight:700;font-size:1.02rem;
+    padding:.95em 1.7em;border-radius:999px;text-decoration:none;
+    border:0;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(120deg,var(--amber),var(--amber-soft));
+    color:#3a2208;box-shadow:0 10px 30px -8px rgba(246,163,64,.6);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(246,163,64,.7)}
+  .btn-ghost{
+    background:transparent;color:var(--paper);
+    border:1.5px solid rgba(108,160,255,.45);
+  }
+  .btn-ghost:hover{border-color:var(--blue-soft);background:rgba(108,160,255,.08)}
+  :focus-visible{outline:3px solid var(--amber-soft);outline-offset:3px;border-radius:6px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;flex-direction:column;
+    justify-content:center;padding:120px 0 90px;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 50% 118%, rgba(246,163,64,.55) 0%, rgba(126,59,107,.35) 30%, rgba(15,19,48,0) 62%),
+      linear-gradient(180deg,#0C1029 0%, #141A47 48%, #20245A 100%);
+  }
+  /* the blue circle = global diabetes symbol, used as the stage "spotlight moon" */
+  .spotlight{
+    position:absolute;top:7%;left:50%;transform:translateX(-50%);
+    width:min(46vw,300px);aspect-ratio:1;border-radius:50%;
+    border:3px solid var(--blue-soft);
+    box-shadow:0 0 60px 6px rgba(42,111,240,.55), inset 0 0 50px rgba(42,111,240,.3);
+    animation:breathe 6s ease-in-out infinite;
+  }
+  .spotlight::after{
+    content:"";position:absolute;inset:18%;border-radius:50%;
+    background:radial-gradient(circle, rgba(108,160,255,.22), transparent 70%);
+  }
+  @keyframes breathe{0%,100%{opacity:.85;box-shadow:0 0 55px 4px rgba(42,111,240,.45),inset 0 0 50px rgba(42,111,240,.28)}50%{opacity:1;box-shadow:0 0 80px 12px rgba(42,111,240,.65),inset 0 0 55px rgba(42,111,240,.35)}}
+  /* faint stage beams */
+  .beams{position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:
+      conic-gradient(from 210deg at 50% 120%, transparent 0deg, rgba(255,206,131,.10) 18deg, transparent 36deg, rgba(108,160,255,.10) 54deg, transparent 72deg);
+    -webkit-mask:linear-gradient(180deg,transparent,#000 60%);
+    mask:linear-gradient(180deg,transparent,#000 60%);
+  }
+  .hero .wrap{position:relative;z-index:2;text-align:center}
+  .kicker{font-size:.85rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-soft);font-weight:600;margin-bottom:1.4rem}
+  .hero h1{
+    font-size:clamp(3rem,12.5vw,7.2rem);font-weight:800;
+    text-shadow:0 2px 40px rgba(0,0,0,.35);margin-bottom:.35em;
+  }
+  .hero h1 .line2{display:block;color:var(--amber-soft)}
+  .hero .lede{font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--paper);max-width:38ch;margin:0 auto 1rem;font-weight:500}
+  .hero .meta{color:var(--muted);font-weight:600;letter-spacing:.02em;margin-bottom:2.2rem;font-size:1.02rem}
+  .hero .meta b{color:var(--paper);font-weight:700}
+  .cta-row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;z-index:2;animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+
+  /* ---------- generic section ---------- */
+  section{padding:96px 0}
+  .cause{background:var(--indigo)}
+  .cause-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .cause h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:1.1rem}
+  .cause p{color:var(--muted);font-size:1.12rem;margin-bottom:1.1rem}
+  .cause p b{color:var(--paper)}
+  .pledge{
+    background:linear-gradient(135deg,rgba(42,111,240,.16),rgba(108,160,255,.06));
+    border:1px solid var(--line);border-radius:22px;padding:34px;
+  }
+  .pledge .big{font-family:var(--display);font-size:clamp(2.6rem,7vw,4rem);font-weight:800;color:var(--amber-soft);line-height:1}
+  .pledge .big span{font-size:1.2rem;color:var(--paper);display:block;font-family:var(--body);font-weight:600;letter-spacing:.04em;margin-top:.6rem}
+  .pledge .note{color:var(--muted);font-size:.95rem;margin-top:1rem}
+
+  /* ---------- lineup (set list) ---------- */
+  .lineup{background:var(--night)}
+  .sec-head{margin-bottom:44px;max-width:46ch}
+  .sec-head h2{font-size:clamp(2rem,4.6vw,3.2rem)}
+  .setlist{max-width:800px}
+  .set-row{
+    display:grid;grid-template-columns:140px 1fr;gap:28px;align-items:baseline;
+    padding:24px 0;border-bottom:1px solid var(--line);
+  }
+  .set-row:last-child{border-bottom:0}
+  .set-time{font-family:var(--display);font-weight:700;color:var(--blue-soft);font-size:1.1rem;letter-spacing:.02em}
+  .set-time.tba{color:var(--muted);font-family:var(--body);font-weight:600;font-size:.95rem;letter-spacing:.16em;text-transform:uppercase}
+  .set-name{font-family:var(--display);font-size:1.6rem;font-weight:700;display:inline-flex;align-items:center;flex-wrap:wrap;gap:.6rem}
+  .set-desc{color:var(--muted);font-weight:600;font-size:.95rem;margin-top:.25rem}
+  .set-row.meta .set-name{font-family:var(--body);font-weight:700;font-size:1.05rem;color:var(--muted);letter-spacing:.04em}
+  .set-row.closer .set-name{color:var(--amber-soft)}
+  .tag-closer{
+    font-family:var(--body);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+    color:#3a2208;background:linear-gradient(120deg,var(--amber),var(--amber-soft));
+    padding:.3em .8em;border-radius:999px;font-weight:700;
+  }
+  .set-row.tbd .set-name{color:var(--muted);font-size:1.15rem}
+
+  /* ---------- details ---------- */
+  .details{background:var(--indigo)}
+  .det-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .details h2{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--paper);margin-bottom:1.4rem}
+  .facts{list-style:none;display:grid;gap:18px}
+  .facts li{display:flex;gap:18px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .facts li:last-child{border-bottom:0;padding-bottom:0}
+  .facts .mark{flex:0 0 auto;width:12px;height:12px;margin-top:.55rem;border-radius:50%;border:2px solid var(--blue);box-shadow:0 0 10px rgba(42,111,240,.5)}
+  .facts .lab{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .facts .val{font-weight:700;font-size:1.12rem;color:var(--paper)}
+  .map{border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px -24px rgba(0,0,0,.7);height:100%;min-height:340px}
+  .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:grayscale(.15)}
+
+  /* ---------- sponsors ---------- */
+  .sponsors{background:var(--night);text-align:center}
+  .sponsors h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:.6rem}
+  .sponsors .sub{color:var(--muted);max-width:48ch;margin:0 auto 40px}
+  .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:40px}
+  .logo-slot{
+    border:1px dashed rgba(108,160,255,.35);border-radius:16px;height:96px;
+    display:grid;place-items:center;color:var(--muted);font-weight:600;font-size:.9rem;
+    background:rgba(108,160,255,.04);
+  }
+
+  /* ---------- final cta / footer ---------- */
+  .finale{
+    text-align:center;
+    background:
+      radial-gradient(100% 120% at 50% 0%, rgba(42,111,240,.35), transparent 60%),
+      linear-gradient(180deg,var(--indigo),#0A0E26);
+  }
+  .finale h2{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;margin-bottom:.5em}
+  .finale p{color:var(--muted);font-size:1.15rem;max-width:42ch;margin:0 auto 2rem}
+  footer{background:#0A0E26;padding:40px 0;border-top:1px solid var(--line)}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
+  .foot a{text-decoration:none;font-weight:600}
+  .foot a:hover{color:var(--paper)}
+  .social{display:flex;gap:18px}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .cause-grid,.det-grid{grid-template-columns:1fr;gap:36px}
+    .logos{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    section{padding:72px 0}
+    .wrap{padding:0 22px}
+    .set-row{grid-template-columns:1fr;gap:4px;padding:20px 0}
+    .foot{flex-direction:column;text-align:center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="spotlight" aria-hidden="true"></div>
+  <div class="beams" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker">Downtown Winter Garden, FL</p>
+    <h1>Garden Sessions<span class="line2">Live for a Cure</span></h1>
+    <p class="lede">An evening of live jazz in the heart of the historic district — every dollar fights Type 1 diabetes.</p>
+    <p class="meta"><b>Saturday, August 29</b> &nbsp;·&nbsp; Doors 4 PM &nbsp;·&nbsp; Tanner Hall at Newton Park</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Donate now</a>
+      <a class="btn btn-ghost" href="#lineup">See the lineup</a>
+    </div>
+  </div>
+  <span class="scroll-hint" aria-hidden="true">Scroll</span>
+</header>
+
+<!-- ===================== THE CAUSE ===================== -->
+<section class="cause" id="cause">
+  <div class="wrap cause-grid">
+    <div>
+      <span class="eyebrow">Why we're here</span>
+      <h2>Every ticket, every donation goes to the cure.</h2>
+      <p>Garden Sessions benefits <b>Touched by Type 1</b>, an Orlando-area nonprofit that since 2000 has worked to elevate awareness of Type 1 diabetes, fund the search for a cure, and help people with T1D thrive.</p>
+      <p>The glowing blue circle above the stage isn't just decoration — it's the global symbol for diabetes. For one night, it lights the music.</p>
+    </div>
+    <aside class="pledge">
+      <div class="big">100%<span>of proceeds donated</span></div>
+      <p class="note">Donations are processed directly through Touched by Type 1's secure page, so your full contribution reaches the mission.</p>
+      <a class="btn btn-primary" style="margin-top:1.2rem" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Give today</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ===================== LINEUP ===================== -->
+<section class="lineup" id="lineup">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The lineup</span>
+      <h2>An evening of live jazz, start to finish.</h2>
+    </div>
+    <div class="setlist">
+      <div class="set-row meta">
+        <span class="set-time">4:00 PM</span>
+        <div><span class="set-name">Doors open</span></div>
+      </div>
+      <div class="set-row">
+        <span class="set-time">5:00 PM</span>
+        <div>
+          <span class="set-name">OYCE</span>
+          <p class="set-desc">Opening set</p>
+        </div>
+      </div>
+      <div class="set-row">
+        <span class="set-time tba">Set time TBA</span>
+        <div>
+          <span class="set-name">Jazz Ambient</span>
+          <p class="set-desc">Four-piece ambient set · band name to be announced</p>
+        </div>
+      </div>
+      <div class="set-row">
+        <span class="set-time tba">Set time TBA</span>
+        <div>
+          <span class="set-name">Jazz Quintet</span>
+          <p class="set-desc">Featured ensemble · band name to be announced</p>
+        </div>
+      </div>
+      <div class="set-row closer">
+        <span class="set-time tba">Closing set</span>
+        <div>
+          <span class="set-name">Her &amp; Co <span class="tag-closer">Closer</span></span>
+          <p class="set-desc">Headlining the night</p>
+        </div>
+      </div>
+      <div class="set-row tbd">
+        <span class="set-time tba">Soon</span>
+        <div>
+          <span class="set-name">One or two more acts</span>
+          <p class="set-desc">Additional performers to be announced</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DETAILS ===================== -->
+<section class="details" id="details">
+  <div class="wrap det-grid">
+    <div>
+      <span class="eyebrow">Know before you go</span>
+      <h2>The details</h2>
+      <ul class="facts">
+        <li>
+          <span class="mark" aria-hidden="true"></span>
+          <div><div class="lab">Date</div><div class="val">Saturday, August 29, 2026</div></div>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true"></span>
+          <div><div class="lab">Time</div><div class="val">Doors 4 PM · Live music from 5 PM</div></div>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true"></span>
+          <div><div class="lab">Venue</div><div class="val">Tanner Hall at Newton Park · Downtown Winter Garden</div></div>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true"></span>
+          <div><div class="lab">Parking</div><div class="val">Free public lots downtown &amp; the SunRail station nearby</div></div>
+        </li>
+        <li>
+          <span class="mark" aria-hidden="true"></span>
+          <div><div class="lab">Good to know</div><div class="val">Family-friendly · food &amp; drinks available</div></div>
+        </li>
+      </ul>
+    </div>
+    <div class="map">
+      <iframe
+        title="Map of Tanner Hall at Newton Park, Winter Garden, Florida"
+        src="https://www.google.com/maps?q=Tanner+Hall+Newton+Park+Winter+Garden+FL&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPONSORS ===================== -->
+<section class="sponsors" id="sponsors">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center;display:flex">Made possible by</span>
+    <h2>Our sponsors</h2>
+    <p class="sub">Local businesses powering a night of music for a cure.</p>
+    <div class="logos">
+      <div class="logo-slot">Your logo here</div>
+      <div class="logo-slot">Your logo here</div>
+      <div class="logo-slot">Your logo here</div>
+      <div class="logo-slot">Your logo here</div>
+    </div>
+    <a class="btn btn-ghost" href="mailto:hello@gardensessions.org">Become a sponsor</a>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="finale" id="donate">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center;display:flex">Join us</span>
+    <h2>Show up. Listen.<br>Help find a cure.</h2>
+    <p>Can't make it that night? You can still be part of it — every gift goes straight to Touched by Type 1.</p>
+    <a class="btn btn-primary" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Donate to Touched by Type 1</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>Garden Sessions · A benefit for Touched by Type 1</div>
+    <nav class="social">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="Facebook">Facebook</a>
+      <a href="mailto:hello@gardensessions.org">Email</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
