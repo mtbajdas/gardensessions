@@ -9,17 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --night:#0F1330;
-    --indigo:#1B2256;
-    --blue:#2A6FF0;
-    --blue-soft:#6CA0FF;
-    --amber:#F6A340;
-    --amber-soft:#FFCE83;
-    --magenta:#7E3B6B;
-    --ink:#14162B;
-    --paper:#EAF0FF;
-    --muted:rgba(234,240,255,.62);
-    --line:rgba(108,160,255,.22);
+    --sky:#0EA5E9;
+    --sky-deep:#0369A1;
+    --sky-soft:#BAE6FD;
+    --night:#0B1D4A;
+    --blue:#2563EB;
+    --blue-soft:#93C5FD;
+    --amber:#F59E0B;
+    --amber-soft:#FDE68A;
+    --ink:#0F172A;
+    --paper:#FFFFFF;
+    --paper-blue:#F0F9FF;
+    --paper-warm:#FFFBEB;
+    --muted:rgba(15,23,42,.55);
+    --line:rgba(14,165,233,.18);
     --maxw:1120px;
     --display:"Bricolage Grotesque",system-ui,sans-serif;
     --body:"Hanken Grotesk",system-ui,sans-serif;
@@ -28,8 +31,8 @@
   html{scroll-behavior:smooth}
   body{
     font-family:var(--body);
-    background:var(--night);
-    color:var(--paper);
+    background:var(--paper);
+    color:var(--ink);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
@@ -41,13 +44,15 @@
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
   .eyebrow{
     font-size:.78rem;font-weight:600;text-transform:uppercase;
-    letter-spacing:.24em;color:var(--blue-soft);
+    letter-spacing:.24em;color:var(--sky-deep);
     display:inline-flex;align-items:center;gap:.6em;margin-bottom:1.1rem;
   }
   .eyebrow::before{
     content:"";width:10px;height:10px;border-radius:50%;
-    border:2px solid var(--blue);box-shadow:0 0 12px var(--blue);
+    border:2px solid var(--sky);box-shadow:0 0 12px var(--sky);
   }
+  .eyebrow.light{color:var(--sky-soft)}
+  .eyebrow.light::before{border-color:var(--sky-soft);box-shadow:0 0 12px rgba(186,230,253,.55)}
   h1,h2,h3{font-family:var(--display);line-height:1.02;font-weight:700;letter-spacing:-.01em}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:.5em;
@@ -57,14 +62,19 @@
   }
   .btn-primary{
     background:linear-gradient(120deg,var(--amber),var(--amber-soft));
-    color:#3a2208;box-shadow:0 10px 30px -8px rgba(246,163,64,.6);
+    color:#3a2208;box-shadow:0 10px 30px -8px rgba(245,158,11,.5);
   }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(246,163,64,.7)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(245,158,11,.65)}
   .btn-ghost{
     background:transparent;color:var(--paper);
-    border:1.5px solid rgba(108,160,255,.45);
+    border:1.5px solid rgba(186,230,253,.5);
   }
-  .btn-ghost:hover{border-color:var(--blue-soft);background:rgba(108,160,255,.08)}
+  .btn-ghost:hover{border-color:var(--sky-soft);background:rgba(186,230,253,.1)}
+  .btn-ghost-dark{
+    background:transparent;color:var(--ink);
+    border:1.5px solid rgba(14,165,233,.4);
+  }
+  .btn-ghost-dark:hover{border-color:var(--sky);background:rgba(14,165,233,.07)}
   :focus-visible{outline:3px solid var(--amber-soft);outline-offset:3px;border-radius:6px}
 
   /* ---------- hero ---------- */
@@ -72,130 +82,156 @@
     position:relative;min-height:100svh;display:flex;flex-direction:column;
     justify-content:center;padding:120px 0 90px;overflow:hidden;
     background:
-      radial-gradient(120% 90% at 50% 118%, rgba(246,163,64,.55) 0%, rgba(126,59,107,.35) 30%, rgba(15,19,48,0) 62%),
-      linear-gradient(180deg,#0C1029 0%, #141A47 48%, #20245A 100%);
+      radial-gradient(110% 80% at 50% 115%, rgba(245,158,11,.7) 0%, rgba(14,165,233,.45) 35%, rgba(11,29,74,0) 60%),
+      linear-gradient(175deg,#0B1D4A 0%,#0E3A7A 40%,#1057AA 70%,#1768C0 100%);
   }
-  /* the blue circle = global diabetes symbol, used as the stage "spotlight moon" */
   .spotlight{
     position:absolute;top:7%;left:50%;transform:translateX(-50%);
     width:min(46vw,300px);aspect-ratio:1;border-radius:50%;
-    border:3px solid var(--blue-soft);
-    box-shadow:0 0 60px 6px rgba(42,111,240,.55), inset 0 0 50px rgba(42,111,240,.3);
+    border:3px solid var(--sky-soft);
+    box-shadow:0 0 70px 10px rgba(14,165,233,.6), inset 0 0 50px rgba(14,165,233,.3);
     animation:breathe 6s ease-in-out infinite;
   }
   .spotlight::after{
     content:"";position:absolute;inset:18%;border-radius:50%;
-    background:radial-gradient(circle, rgba(108,160,255,.22), transparent 70%);
+    background:radial-gradient(circle, rgba(186,230,253,.28), transparent 70%);
   }
-  @keyframes breathe{0%,100%{opacity:.85;box-shadow:0 0 55px 4px rgba(42,111,240,.45),inset 0 0 50px rgba(42,111,240,.28)}50%{opacity:1;box-shadow:0 0 80px 12px rgba(42,111,240,.65),inset 0 0 55px rgba(42,111,240,.35)}}
-  /* faint stage beams */
-  .beams{position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background:
-      conic-gradient(from 210deg at 50% 120%, transparent 0deg, rgba(255,206,131,.10) 18deg, transparent 36deg, rgba(108,160,255,.10) 54deg, transparent 72deg);
+  @keyframes breathe{
+    0%,100%{opacity:.85;box-shadow:0 0 65px 8px rgba(14,165,233,.5),inset 0 0 50px rgba(14,165,233,.28)}
+    50%{opacity:1;box-shadow:0 0 90px 18px rgba(14,165,233,.72),inset 0 0 60px rgba(14,165,233,.38)}
+  }
+  .beams{position:absolute;inset:0;pointer-events:none;opacity:.55;
+    background:conic-gradient(from 210deg at 50% 120%, transparent 0deg, rgba(253,230,138,.13) 18deg, transparent 36deg, rgba(14,165,233,.13) 54deg, transparent 72deg);
     -webkit-mask:linear-gradient(180deg,transparent,#000 60%);
     mask:linear-gradient(180deg,transparent,#000 60%);
   }
   .hero .wrap{position:relative;z-index:2;text-align:center}
   .kicker{font-size:.85rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-soft);font-weight:600;margin-bottom:1.4rem}
   .hero h1{
-    font-size:clamp(3rem,12.5vw,7.2rem);font-weight:800;
+    font-size:clamp(3rem,12.5vw,7.2rem);font-weight:800;color:#fff;
     text-shadow:0 2px 40px rgba(0,0,0,.35);margin-bottom:.35em;
   }
   .hero h1 .line2{display:block;color:var(--amber-soft)}
-  .hero .lede{font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--paper);max-width:38ch;margin:0 auto 1rem;font-weight:500}
-  .hero .meta{color:var(--muted);font-weight:600;letter-spacing:.02em;margin-bottom:2.2rem;font-size:1.02rem}
-  .hero .meta b{color:var(--paper);font-weight:700}
+  .hero .lede{font-size:clamp(1.05rem,2.4vw,1.4rem);color:rgba(255,255,255,.92);max-width:40ch;margin:0 auto 1rem;font-weight:500}
+  .hero .meta{color:rgba(186,230,253,.85);font-weight:600;letter-spacing:.02em;margin-bottom:2.2rem;font-size:1.02rem}
+  .hero .meta b{color:#fff;font-weight:700}
   .cta-row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
-  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;z-index:2;animation:bob 2.4s ease-in-out infinite}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(186,230,253,.55);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;z-index:2;animation:bob 2.4s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
 
-  /* ---------- generic section ---------- */
+  /* ---------- venue photos ---------- */
+  .venue{background:var(--paper);padding:56px 0}
+  .photo-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:12px;
+    border-radius:22px;
+    overflow:hidden;
+    height:300px;
+  }
+  .photo-grid .ph{
+    overflow:hidden;
+    background:var(--paper-blue);
+    position:relative;
+  }
+  .photo-grid .ph img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .55s ease;display:block;
+  }
+  .photo-grid .ph:hover img{transform:scale(1.05)}
+
+  /* ---------- cause ---------- */
+  .cause{background:var(--paper-blue)}
   section{padding:96px 0}
-  .cause{background:var(--indigo)}
   .cause-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
-  .cause h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:1.1rem}
+  .cause h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:1.1rem;color:var(--ink)}
   .cause p{color:var(--muted);font-size:1.12rem;margin-bottom:1.1rem}
-  .cause p b{color:var(--paper)}
+  .cause p b{color:var(--ink)}
   .pledge{
-    background:linear-gradient(135deg,rgba(42,111,240,.16),rgba(108,160,255,.06));
-    border:1px solid var(--line);border-radius:22px;padding:34px;
+    background:linear-gradient(135deg,var(--sky-deep),var(--blue));
+    border-radius:22px;padding:34px;color:#fff;
+    box-shadow:0 20px 50px -16px rgba(3,105,161,.5);
   }
   .pledge .big{font-family:var(--display);font-size:clamp(2.6rem,7vw,4rem);font-weight:800;color:var(--amber-soft);line-height:1}
-  .pledge .big span{font-size:1.2rem;color:var(--paper);display:block;font-family:var(--body);font-weight:600;letter-spacing:.04em;margin-top:.6rem}
-  .pledge .note{color:var(--muted);font-size:.95rem;margin-top:1rem}
+  .pledge .big span{font-size:1.2rem;color:rgba(255,255,255,.9);display:block;font-family:var(--body);font-weight:600;letter-spacing:.04em;margin-top:.6rem}
+  .pledge .note{color:rgba(255,255,255,.75);font-size:.95rem;margin-top:1rem}
 
-  /* ---------- lineup (set list) ---------- */
+  /* ---------- lineup ---------- */
   .lineup{background:var(--night)}
   .sec-head{margin-bottom:44px;max-width:46ch}
-  .sec-head h2{font-size:clamp(2rem,4.6vw,3.2rem)}
+  .sec-head h2{font-size:clamp(2rem,4.6vw,3.2rem);color:#fff}
   .setlist{max-width:800px}
   .set-row{
     display:grid;grid-template-columns:140px 1fr;gap:28px;align-items:baseline;
-    padding:24px 0;border-bottom:1px solid var(--line);
+    padding:24px 0;border-bottom:1px solid rgba(147,197,253,.13);
   }
   .set-row:last-child{border-bottom:0}
-  .set-time{font-family:var(--display);font-weight:700;color:var(--blue-soft);font-size:1.1rem;letter-spacing:.02em}
-  .set-time.tba{color:var(--muted);font-family:var(--body);font-weight:600;font-size:.95rem;letter-spacing:.16em;text-transform:uppercase}
-  .set-name{font-family:var(--display);font-size:1.6rem;font-weight:700;display:inline-flex;align-items:center;flex-wrap:wrap;gap:.6rem}
-  .set-desc{color:var(--muted);font-weight:600;font-size:.95rem;margin-top:.25rem}
-  .set-row.meta .set-name{font-family:var(--body);font-weight:700;font-size:1.05rem;color:var(--muted);letter-spacing:.04em}
+  .set-time{font-family:var(--display);font-weight:700;color:var(--sky-soft);font-size:1.1rem;letter-spacing:.02em}
+  .set-time.tba{color:rgba(186,230,253,.4);font-family:var(--body);font-weight:600;font-size:.95rem;letter-spacing:.16em;text-transform:uppercase}
+  .set-name{font-family:var(--display);font-size:1.6rem;font-weight:700;color:#fff;display:inline-flex;align-items:center;flex-wrap:wrap;gap:.6rem}
+  .set-desc{color:rgba(186,230,253,.58);font-weight:600;font-size:.95rem;margin-top:.25rem}
+  .set-row.meta .set-name{font-family:var(--body);font-weight:700;font-size:1.05rem;color:rgba(186,230,253,.5);letter-spacing:.04em}
   .set-row.closer .set-name{color:var(--amber-soft)}
   .tag-closer{
     font-family:var(--body);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
     color:#3a2208;background:linear-gradient(120deg,var(--amber),var(--amber-soft));
     padding:.3em .8em;border-radius:999px;font-weight:700;
   }
-  .set-row.tbd .set-name{color:var(--muted);font-size:1.15rem}
+  .set-row.tbd .set-name{color:rgba(186,230,253,.3);font-size:1.15rem}
 
   /* ---------- details ---------- */
-  .details{background:var(--indigo)}
+  .details{background:var(--paper-warm)}
   .det-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-  .details h2{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--paper);margin-bottom:1.4rem}
+  .details h2{font-size:clamp(2rem,4.6vw,3.2rem);color:var(--ink);margin-bottom:1.4rem}
   .facts{list-style:none;display:grid;gap:18px}
-  .facts li{display:flex;gap:18px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .facts li{display:flex;gap:18px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid rgba(14,165,233,.14)}
   .facts li:last-child{border-bottom:0;padding-bottom:0}
-  .facts .mark{flex:0 0 auto;width:12px;height:12px;margin-top:.55rem;border-radius:50%;border:2px solid var(--blue);box-shadow:0 0 10px rgba(42,111,240,.5)}
+  .facts .mark{flex:0 0 auto;width:12px;height:12px;margin-top:.55rem;border-radius:50%;border:2px solid var(--sky);box-shadow:0 0 10px rgba(14,165,233,.4)}
   .facts .lab{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .facts .val{font-weight:700;font-size:1.12rem;color:var(--paper)}
-  .map{border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px -24px rgba(0,0,0,.7);height:100%;min-height:340px}
-  .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:grayscale(.15)}
+  .facts .val{font-weight:700;font-size:1.12rem;color:var(--ink)}
+  .map{border-radius:20px;overflow:hidden;border:1px solid rgba(14,165,233,.18);box-shadow:0 18px 50px -24px rgba(0,0,0,.18);height:100%;min-height:340px}
+  .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:grayscale(.1)}
 
   /* ---------- sponsors ---------- */
-  .sponsors{background:var(--night);text-align:center}
-  .sponsors h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:.6rem}
+  .sponsors{background:var(--paper-blue);text-align:center}
+  .sponsors h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:.6rem;color:var(--ink)}
   .sponsors .sub{color:var(--muted);max-width:48ch;margin:0 auto 40px}
   .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:40px}
   .logo-slot{
-    border:1px dashed rgba(108,160,255,.35);border-radius:16px;height:96px;
+    border:1.5px dashed rgba(14,165,233,.38);border-radius:16px;height:96px;
     display:grid;place-items:center;color:var(--muted);font-weight:600;font-size:.9rem;
-    background:rgba(108,160,255,.04);
+    background:rgba(14,165,233,.04);
   }
 
   /* ---------- final cta / footer ---------- */
   .finale{
-    text-align:center;
+    text-align:center;color:#fff;
     background:
-      radial-gradient(100% 120% at 50% 0%, rgba(42,111,240,.35), transparent 60%),
-      linear-gradient(180deg,var(--indigo),#0A0E26);
+      radial-gradient(100% 120% at 50% 0%, rgba(14,165,233,.45), transparent 65%),
+      linear-gradient(180deg,var(--night) 0%,#070C1E 100%);
   }
-  .finale h2{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;margin-bottom:.5em}
-  .finale p{color:var(--muted);font-size:1.15rem;max-width:42ch;margin:0 auto 2rem}
-  footer{background:#0A0E26;padding:40px 0;border-top:1px solid var(--line)}
-  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
+  .finale h2{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;margin-bottom:.5em;color:#fff}
+  .finale p{color:rgba(186,230,253,.75);font-size:1.15rem;max-width:44ch;margin:0 auto 2rem}
+  footer{background:#070C1E;padding:40px 0;border-top:1px solid rgba(14,165,233,.13)}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:rgba(186,230,253,.45);font-size:.92rem}
   .foot a{text-decoration:none;font-weight:600}
-  .foot a:hover{color:var(--paper)}
+  .foot a:hover{color:rgba(186,230,253,.88)}
   .social{display:flex;gap:18px}
 
   /* ---------- responsive ---------- */
   @media(max-width:860px){
     .cause-grid,.det-grid{grid-template-columns:1fr;gap:36px}
     .logos{grid-template-columns:1fr 1fr}
+    .photo-grid{grid-template-columns:1fr 1fr;height:220px}
+    .photo-grid .ph:last-child{display:none}
   }
   @media(max-width:560px){
     section{padding:72px 0}
     .wrap{padding:0 22px}
     .set-row{grid-template-columns:1fr;gap:4px;padding:20px 0}
     .foot{flex-direction:column;text-align:center}
+    .photo-grid{grid-template-columns:1fr;height:200px}
+    .photo-grid .ph:not(:first-child){display:none}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto}
@@ -211,8 +247,8 @@
   <div class="wrap">
     <p class="kicker">Downtown Winter Garden, FL</p>
     <h1>Garden Sessions<span class="line2">Live for a Cure</span></h1>
-    <p class="lede">An evening of live jazz in the heart of the historic district — every dollar fights Type 1 diabetes.</p>
-    <p class="meta"><b>Saturday, August 29</b> &nbsp;·&nbsp; Doors 4 PM &nbsp;·&nbsp; Tanner Hall at Newton Park</p>
+    <p class="lede">A night of live music at Newton Park, brought together by the T1D community. Come be part of it.</p>
+    <p class="meta"><b>Saturday, August 29</b> &nbsp;·&nbsp; 4 PM &nbsp;·&nbsp; Tanner Hall at Newton Park</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Donate now</a>
       <a class="btn btn-ghost" href="#lineup">See the lineup</a>
@@ -221,14 +257,31 @@
   <span class="scroll-hint" aria-hidden="true">Scroll</span>
 </header>
 
+<!-- ===================== VENUE PHOTOS ===================== -->
+<section class="venue">
+  <div class="wrap">
+    <div class="photo-grid">
+      <div class="ph">
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=900&q=80" alt="Outdoor festival at Newton Park, Winter Garden" loading="lazy">
+      </div>
+      <div class="ph">
+        <img src="https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?auto=format&fit=crop&w=600&q=80" alt="Families enjoying a summer evening in the park" loading="lazy">
+      </div>
+      <div class="ph">
+        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Live music under the open sky" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== THE CAUSE ===================== -->
 <section class="cause" id="cause">
   <div class="wrap cause-grid">
     <div>
       <span class="eyebrow">Why we're here</span>
       <h2>Every ticket, every donation goes to the cure.</h2>
-      <p>Garden Sessions benefits <b>Touched by Type 1</b>, an Orlando-area nonprofit that since 2000 has worked to elevate awareness of Type 1 diabetes, fund the search for a cure, and help people with T1D thrive.</p>
-      <p>The glowing blue circle above the stage isn't just decoration — it's the global symbol for diabetes. For one night, it lights the music.</p>
+      <p>Garden Sessions benefits <b>Touched by Type 1</b>, an Orlando-area nonprofit that has stood alongside our T1D community since 2000, raising awareness, funding the search for a cure, and helping families with T1D thrive.</p>
+      <p>The glowing blue circle above the stage is the global symbol for diabetes. For one night, we let it light the music.</p>
     </div>
     <aside class="pledge">
       <div class="big">100%<span>of proceeds donated</span></div>
@@ -242,19 +295,19 @@
 <section class="lineup" id="lineup">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">The lineup</span>
+      <span class="eyebrow light">The lineup</span>
       <h2>An evening of live jazz, start to finish.</h2>
     </div>
     <div class="setlist">
       <div class="set-row meta">
         <span class="set-time">4:00 PM</span>
-        <div><span class="set-name">Doors open</span></div>
+        <div><span class="set-name">Park opens</span></div>
       </div>
       <div class="set-row">
         <span class="set-time">5:00 PM</span>
         <div>
           <span class="set-name">OYCE</span>
-          <p class="set-desc">Opening set · Orlando Youth Chambers Ensembles — a Central Florida youth music charity</p>
+          <p class="set-desc">Opening set · Orlando Youth Chambers Ensembles, a Central Florida youth music charity</p>
         </div>
       </div>
       <div class="set-row">
@@ -302,7 +355,7 @@
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
-          <div><div class="lab">Time</div><div class="val">Doors 4 PM · Live music from 5 PM</div></div>
+          <div><div class="lab">Time</div><div class="val">Park opens 4 PM · Live music from 5 PM</div></div>
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
@@ -310,11 +363,11 @@
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
-          <div><div class="lab">Parking</div><div class="val">Free public lots downtown &amp; the SunRail station nearby</div></div>
+          <div><div class="lab">Parking</div><div class="val">Free public lots downtown and the SunRail station nearby</div></div>
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
-          <div><div class="lab">Good to know</div><div class="val">Family-friendly · food &amp; drinks available · bring a chair or picnic blanket</div></div>
+          <div><div class="lab">Good to know</div><div class="val">Family-friendly · food and drinks available · bring a chair or picnic blanket</div></div>
         </li>
       </ul>
     </div>
@@ -339,16 +392,16 @@
       <div class="logo-slot">Your logo here</div>
       <div class="logo-slot">Your logo here</div>
     </div>
-    <a class="btn btn-ghost" href="mailto:matthew@fracturesystems.com">Become a sponsor</a>
+    <a class="btn btn-ghost-dark" href="mailto:matthew@fracturesystems.com">Become a sponsor</a>
   </div>
 </section>
 
 <!-- ===================== FINAL CTA ===================== -->
 <section class="finale" id="donate">
   <div class="wrap">
-    <span class="eyebrow" style="justify-content:center;display:flex">Join us</span>
+    <span class="eyebrow light" style="justify-content:center;display:flex">Join us</span>
     <h2>Show up. Listen.<br>Help find a cure.</h2>
-    <p>Can't make it that night? You can still be part of it — every gift goes straight to Touched by Type 1.</p>
+    <p>Whether you're living with T1D, love someone who is, or just want to do some good in the world, there's a place for you at Garden Sessions.</p>
     <a class="btn btn-primary" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Donate to Touched by Type 1</a>
   </div>
 </section>
@@ -359,7 +412,7 @@
     <nav class="social">
       <a href="#" aria-label="Instagram">Instagram</a>
       <a href="#" aria-label="Facebook">Facebook</a>
-      <a href="mailto:hello@gardensessions.org">Email</a>
+      <a href="mailto:matthew@fracturesystems.com">Email</a>
     </nav>
   </div>
 </footer>
