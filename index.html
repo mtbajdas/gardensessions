@@ -166,12 +166,52 @@
   /* ---------- sponsors ---------- */
   .sponsors{background:var(--night);text-align:center}
   .sponsors h2{font-size:clamp(1.7rem,4vw,2.6rem);margin-bottom:.6rem}
-  .sponsors .sub{color:var(--muted);max-width:48ch;margin:0 auto 40px}
-  .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:40px}
+  .sponsors .sub{color:var(--muted);max-width:48ch;margin:0 auto 48px}
+
+  /* presented by */
+  .presented-by{margin-bottom:56px}
+  .presented-label{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--amber-soft);font-weight:700;margin-bottom:14px}
+  .logo-slot-presenting{
+    border:2px solid rgba(246,163,64,.5);border-radius:22px;height:140px;max-width:420px;margin:0 auto;
+    display:grid;place-items:center;color:var(--amber-soft);font-weight:700;font-size:1.15rem;
+    background:linear-gradient(135deg,rgba(246,163,64,.09),rgba(246,163,64,.03));
+    box-shadow:0 0 40px -12px rgba(246,163,64,.3);
+  }
+
+  /* tiers */
+  .tier{margin-bottom:44px}
+  .tier-label{
+    font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+    margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  .tier-label::before,.tier-label::after{content:"";flex:1;max-width:80px;height:1px}
+  .tier-gold .tier-label{color:#F6C94A}
+  .tier-gold .tier-label::before,.tier-gold .tier-label::after{background:rgba(246,201,74,.35)}
+  .tier-silver .tier-label{color:#A8BFD8}
+  .tier-silver .tier-label::before,.tier-silver .tier-label::after{background:rgba(168,191,216,.3)}
+  .tier-bronze .tier-label{color:#C97C4A}
+  .tier-bronze .tier-label::before,.tier-bronze .tier-label::after{background:rgba(201,124,74,.3)}
+
+  .logos-gold{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .logos-silver{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .logos-bronze{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+
   .logo-slot{
-    border:1px dashed rgba(108,160,255,.35);border-radius:16px;height:96px;
-    display:grid;place-items:center;color:var(--muted);font-weight:600;font-size:.9rem;
+    border:1px dashed rgba(108,160,255,.35);border-radius:16px;
+    display:grid;place-items:center;color:var(--muted);font-weight:600;
     background:rgba(108,160,255,.04);
+  }
+  .logos-gold .logo-slot{height:100px;font-size:.9rem}
+  .logos-silver .logo-slot{height:80px;font-size:.82rem}
+  .logos-bronze .logo-slot{height:64px;font-size:.75rem}
+
+  @media(max-width:860px){
+    .logos-gold{grid-template-columns:repeat(2,1fr)}
+    .logos-silver{grid-template-columns:repeat(2,1fr)}
+    .logos-bronze{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:480px){
+    .logos-bronze{grid-template-columns:repeat(2,1fr)}
   }
 
   /* ---------- final cta / footer ---------- */
@@ -345,13 +385,47 @@
   <div class="wrap">
     <span class="eyebrow" style="justify-content:center;display:flex">Made possible by</span>
     <h2>Our sponsors</h2>
-    <p class="sub">Local businesses powering a night of music for a cure.</p>
-    <div class="logos">
-      <div class="logo-slot">Your logo here</div>
-      <div class="logo-slot">Your logo here</div>
-      <div class="logo-slot">Your logo here</div>
-      <div class="logo-slot">Your logo here</div>
+    <p class="sub">Local businesses and healthcare partners powering a night of music for a cure.</p>
+
+    <!-- Presenting sponsor -->
+    <div class="presented-by">
+      <p class="presented-label">Presented by</p>
+      <div class="logo-slot-presenting">Orlando Health / Advent Health</div>
     </div>
+
+    <!-- Gold tier -->
+    <div class="tier tier-gold">
+      <p class="tier-label">Gold</p>
+      <div class="logos-gold">
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+      </div>
+    </div>
+
+    <!-- Silver tier -->
+    <div class="tier tier-silver">
+      <p class="tier-label">Silver</p>
+      <div class="logos-silver">
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+      </div>
+    </div>
+
+    <!-- Bronze tier -->
+    <div class="tier tier-bronze">
+      <p class="tier-label">Bronze</p>
+      <div class="logos-bronze">
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+        <div class="logo-slot">Your logo here</div>
+      </div>
+    </div>
+
     <a class="btn btn-ghost-dark" href="mailto:matthew@fracturesystems.com">Become a sponsor</a>
   </div>
 </section>
