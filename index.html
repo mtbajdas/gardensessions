@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garden Sessions · A Live Music Festival for a Cure</title>
-<meta name="description" content="A free outdoor music festival at Tanner Hall, Newton Park in Winter Garden, FL on August 29, 2026. Six hours of live music benefiting Touched by Type 1 — 100% of public donations go to the cure.">
+<meta name="description" content="A free live music festival on August 29, 2026 (location TBD). Six hours of live music benefiting Touched by Type 1 — 100% of public donations go to the cure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -160,8 +160,14 @@
   .facts .mark{flex:0 0 auto;width:12px;height:12px;margin-top:.55rem;border-radius:50%;border:2px solid var(--blue);box-shadow:0 0 10px rgba(42,111,240,.5)}
   .facts .lab{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
   .facts .val{font-weight:700;font-size:1.12rem;color:var(--paper)}
-  .map{border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px -24px rgba(0,0,0,.7);height:100%;min-height:340px}
+  .map{
+    border-radius:20px;overflow:hidden;border:1px dashed rgba(108,160,255,.35);
+    height:100%;min-height:340px;background:rgba(108,160,255,.04);
+    display:grid;place-items:center;text-align:center;padding:32px;
+  }
   .map iframe{width:100%;height:100%;min-height:340px;border:0;display:block;filter:grayscale(.15)}
+  .map .map-placeholder{color:var(--muted);font-weight:600}
+  .map .map-placeholder b{display:block;font-family:var(--display);font-size:1.4rem;color:var(--paper);margin-bottom:.4rem}
 
   /* ---------- sponsors ---------- */
   .sponsors{background:var(--night);text-align:center}
@@ -251,10 +257,10 @@
   <div class="spotlight" aria-hidden="true"></div>
   <div class="beams" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="kicker">Downtown Winter Garden, FL</p>
+    <p class="kicker">Location TBD</p>
     <h1>Garden Sessions<span class="line2">Live for a Cure</span></h1>
-    <p class="lede">A night of live music at Newton Park, brought together by the Type 1 Diabetes community. Come be part of it.</p>
-    <p class="meta"><b>Saturday, August 29</b> &nbsp;·&nbsp; 4 PM &nbsp;·&nbsp; Tanner Hall at Newton Park</p>
+    <p class="lede">A night of live music brought together by the Type 1 Diabetes community. Come be part of it.</p>
+    <p class="meta"><b>Saturday, August 29</b> &nbsp;·&nbsp; 4 PM &nbsp;·&nbsp; Location TBD</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://www.touchedbytype1.org/donate" target="_blank" rel="noopener">Donate now</a>
       <a class="btn btn-ghost" href="#lineup">See the lineup</a>
@@ -350,11 +356,11 @@
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
-          <div><div class="lab">Venue</div><div class="val">Tanner Hall at Newton Park · Downtown Winter Garden</div></div>
+          <div><div class="lab">Venue</div><div class="val">TBD</div></div>
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
-          <div><div class="lab">Parking</div><div class="val">Free public parking lots downtown</div></div>
+          <div><div class="lab">Parking</div><div class="val">TBD</div></div>
         </li>
         <li>
           <span class="mark" aria-hidden="true"></span>
@@ -367,10 +373,7 @@
       </ul>
     </div>
     <div class="map">
-      <iframe
-        title="Map of Tanner Hall at Newton Park, Winter Garden, Florida"
-        src="https://www.google.com/maps?q=Tanner+Hall+Newton+Park+Winter+Garden+FL&output=embed"
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <p class="map-placeholder"><b>Location TBD</b>Venue details coming soon</p>
     </div>
   </div>
 </section>
